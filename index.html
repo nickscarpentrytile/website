@@ -3,190 +3,330 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nick's Carpentry & Tile Services</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Nick's Carpentry and Tile Services</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
-      background: #faf8f6;
-      color: #333;
+      background: #f8f5f0;
+      color: #4a2f1d;
+      line-height: 1.6;
     }
 
     header {
-      position: relative;
-      height: 80vh;
-      /* ✅ исправлен фон (рабочая текстура дерева) */
-      background: url('https://images.unsplash.com/photo-1505691938895-1758d7feb511') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      color: white;
+      background: linear-gradient(135deg, #8B4513, #5a3215);
+      color: #fff;
+      padding: 40px 20px;
       text-align: center;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    header h1, header p, .cta {
-      position: relative;
-      z-index: 1;
     }
 
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      margin: 0;
+      font-size: 2.4rem;
     }
 
     header p {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      margin-top: 10px;
+      font-size: 1.1rem;
+      font-style: italic;
     }
 
-    .cta {
-      background: #e09c4a;
-      color: white;
-      display: inline-block;
-      padding: 0.8rem 1.6rem;
-      border-radius: 6px;
+    header .phone-link {
+      color: #ffe9c6;
       text-decoration: none;
-      font-weight: 600;
-      margin-top: 1rem;
-      transition: background 0.3s;
+      font-weight: bold;
     }
 
-    .cta:hover {
-      background: #c8833a;
-    }
-
-    section {
-      padding: 3rem 1.5rem;
-      max-width: 900px;
-      margin: auto;
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px 50px;
     }
 
     h2 {
-      text-align: center;
-      color: #2b3a42;
-      margin-bottom: 2rem;
+      margin-top: 0;
+      color: #5a3215;
+      border-left: 4px solid #8B4513;
+      padding-left: 10px;
     }
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+    section {
+      margin-bottom: 40px;
     }
 
-    .card {
-      background: white;
+    /* BEFORE & AFTER SECTION */
+
+    .before-after .ba-item {
+      background: #f1e2cf;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-      text-align: center;
-      transition: transform 0.3s;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
-    .card:hover {
-      transform: translateY(-5px);
+    .before-after h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
     }
 
-    .card h3 {
-      margin-top: 1rem;
-      color: #e09c4a;
-    }
-
-    form {
+    .ba-images {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 600px;
-      margin: auto;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    input, textarea {
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+    .ba-side {
+      flex: 1 1 250px;
+      position: relative;
+    }
+
+    .ba-side img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(139,69,19,0.9);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge.after {
+      background: rgba(46,139,87,0.9);
+    }
+
+    /* SIMPLE PROJECT GALLERY (ОБЫЧНЫЕ КАРТИНКИ) */
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+      object-fit: cover;
+    }
+
+    /* CONTACT FORM */
+
+    .contact-form {
+      background-color: #e8d5c0;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 9px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #b89b7c;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    .contact-form button {
+      background-color: #8B4513;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 999px;
+      cursor: pointer;
       font-size: 1rem;
     }
 
-    button {
-      background: #2b3a42;
-      color: white;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
+    .contact-form button:hover {
+      background-color: #A0522D;
     }
 
-    button:hover {
-      background: #1c252b;
+    .contact-note {
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
     }
 
     footer {
+      background-color: #5a3215;
+      color: #fff;
       text-align: center;
-      padding: 2rem;
-      background: #2b3a42;
-      color: white;
-      margin-top: 3rem;
+      padding: 15px 10px;
+      font-size: 0.9rem;
+    }
+
+    a.phone-link {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Nick's Carpentry & Tile Services</h1>
-    <p>Reliable craftsmanship across Charleston</p>
-    <a href="tel:+18435579995" class="cta">📞 Call Now</a>
+    <h1>Nick's Carpentry and Tile Services</h1>
+    <p>Reliable carpentry and tile work across Charleston.</p>
+    <p>
+      Call or text:
+      <a class="phone-link" href="tel:+18435579995">+1 (843) 557-9995</a>
+    </p>
   </header>
 
-  <section>
-    <h2>Our Services</h2>
-    <div class="services">
-      <div class="card">
-        <h3>Custom Carpentry</h3>
-        <p>From furniture to frames — handcrafted work with precision and care.</p>
-      </div>
-      <div class="card">
-        <h3>Tile Installation</h3>
-        <p>Beautiful, durable tilework for kitchens, bathrooms, and more.</p>
-      </div>
-      <div class="card">
-        <h3>Remodeling</h3>
-        <p>Full kitchen and bathroom transformations that fit your lifestyle.</p>
-      </div>
-      <div class="card">
-        <h3>Decks & Flooring</h3>
-        <p>Strong, stylish outdoor and indoor woodwork built to last.</p>
-      </div>
-    </div>
-  </section>
+  <main>
+    <!-- ВМЕСТО "OUR SERVICES" — СРАЗУ BEFORE & AFTER -->
+    <section class="before-after">
+      <h2>Before &amp; After Projects</h2>
 
-  <section>
-    <h2>Get in Touch</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea rows="4" placeholder="Your Message"></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
+      <div class="ba-item">
+        <h3>AC Repair</h3>
+        <div class="ba-images">
+          <div class="ba-side">
+            <span class="badge">Before</span>
+            <img src="assets/AC_before.jpg" alt="AC repair before">
+          </div>
+          <div class="ba-side">
+            <span class="badge after">After</span>
+            <img src="assets/AC_after.jpg" alt="AC repair after">
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-item">
+        <h3>Hallway Remodel</h3>
+        <div class="ba-images">
+          <div class="ba-side">
+            <span class="badge">Before</span>
+            <img src="assets/hallway_before.jpg" alt="Hallway remodel before">
+          </div>
+          <div class="ba-side">
+            <span class="badge after">After</span>
+            <img src="assets/hallway_after.jpg" alt="Hallway remodel after">
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-item">
+        <h3>Window Trim &amp; Finish</h3>
+        <div class="ba-images">
+          <div class="ba-side">
+            <span class="badge">Before</span>
+            <img src="assets/window_before.jpg" alt="Window work before">
+          </div>
+          <div class="ba-side">
+            <span class="badge after">After</span>
+            <img src="assets/window_after.jpg" alt="Window work after">
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-item">
+        <h3>Gate Replacement</h3>
+        <div class="ba-images">
+          <div class="ba-side">
+            <span class="badge">Before</span>
+            <img src="assets/gate_before.jpg" alt="Gate before">
+          </div>
+          <div class="ba-side">
+            <span class="badge after">After</span>
+            <img src="assets/gate_after.jpg" alt="Gate after">
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-item">
+        <h3>Staircase Refinish 1</h3>
+        <div class="ba-images">
+          <div class="ba-side">
+            <span class="badge">Before</span>
+            <img src="assets/stair_1_before.jpg" alt="Stairs before">
+          </div>
+          <div class="ba-side">
+            <span class="badge after">After</span>
+            <img src="assets/stair_1_after.jpg" alt="Stairs after">
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-item">
+        <h3>Staircase Refinish 2</h3>
+        <div class="ba-images">
+          <div class="ba-side">
+            <span class="badge">Before</span>
+            <img src="assets/stair_2_before.jpg" alt="Stairs before">
+          </div>
+          <div class="ba-side">
+            <span class="badge after">After</span>
+            <img src="assets/stair_2_after.jpg" alt="Stairs after">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ОСТАВИЛА ПРОСТУЮ ГАЛЕРЕЮ ЕСЛИ ХОЧЕШЬ ЕЩЁ ФОТО -->
+    <section class="gallery">
+      <h2>Project Gallery</h2>
+      <div class="gallery-grid">
+        <!-- Можешь удалить или добавить свои фото -->
+        <img src="assets/AC_after.jpg" alt="Finished project">
+        <img src="assets/hallway_after.jpg" alt="Finished project">
+        <img src="assets/window_after.jpg" alt="Finished project">
+        <img src="assets/gate_after.jpg" alt="Finished project">
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2>Request a Free Estimate</h2>
+      <div class="contact-form">
+        <form name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
+          <p>
+            <label>Your Name</label>
+            <input type="text" name="name" required />
+          </p>
+          <p>
+            <label>Your Email</label>
+            <input type="email" name="email" required />
+          </p>
+          <p>
+            <label>How can we help?</label>
+            <textarea name="message" rows="5" required></textarea>
+          </p>
+          <button type="submit">Send Message</button>
+        </form>
+        <p class="contact-note">
+          Prefer to talk? Call or text
+          <a class="phone-link" href="tel:+18435579995">+1 (843) 557-9995</a>
+        </p>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 Nick's Carpentry & Tile Services | Charleston, SC</p>
+    &copy; Nick's Carpentry and Tile Services 2025. All rights reserved.
   </footer>
 </body>
 </html>
