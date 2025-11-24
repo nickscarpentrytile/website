@@ -22,39 +22,34 @@
       line-height: 1.6;
     }
 
-    /* ---- CLEAN HERO WITHOUT BLUE FILTER ---- */
+    /* CLEAN HERO */
     header {
       position: relative;
       color: #fff;
       text-align: center;
       padding: 60px 20px 80px;
-      background: url("assets/hero_carpentry.jpg") center/cover no-repeat;
+      background: url("/website/assets/hero_carpentry.jpg") center/cover no-repeat;
     }
 
-    header::after {
-      content: none;
-    }
-
-    header > * {
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 3px 6px rgba(0,0,0,0.4);
-    }
+    header::after { content: none; }
 
     header h1 {
       margin: 0;
       font-size: 2.5rem;
-      letter-spacing: 0.04em;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.4);
     }
 
-    header p.tagline {
-      margin: 10px 0 10px;
+    header p {
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .tagline {
+      margin: 12px 0 4px;
       font-size: 1.1rem;
-      opacity: 0.95;
       font-weight: 500;
     }
 
-    header p.lic {
+    .lic {
       margin: 0 0 20px;
       font-size: 1rem;
       opacity: 0.9;
@@ -73,13 +68,8 @@
       font-weight: 600;
       font-size: 1rem;
     }
+    .hero-phone a { color: #fff; text-decoration: none; }
 
-    .hero-phone a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    /* MAIN */
     main {
       max-width: 1100px;
       margin: -40px auto 40px;
@@ -101,7 +91,6 @@
       align-items: center;
       gap: 8px;
     }
-
     h2::before {
       content: "";
       width: 6px;
@@ -110,21 +99,17 @@
       background: linear-gradient(180deg, var(--accent), var(--blue-mid));
     }
 
-    /* ---- SLIDER FIXED HEIGHT ---- */
+    /* SLIDER */
 
     .ba-wrapper {
       position: relative;
       overflow: hidden;
     }
-
     .ba-slide {
       display: none;
       animation: fadeIn 0.35s ease-out;
     }
-
-    .ba-slide.active {
-      display: block;
-    }
+    .ba-slide.active { display: block; }
 
     .ba-title {
       margin: 0 0 10px;
@@ -134,26 +119,22 @@
 
     .ba-images {
       display: flex;
-      flex-wrap: nowrap;
       gap: 10px;
-      align-items: stretch;
     }
 
     .ba-side {
-      flex: 1 1 50%;
-      min-width: 0;
-      position: relative;
+      flex: 1;
       border-radius: 14px;
       overflow: hidden;
-      background: #0b2b4a;
       height: 300px;
+      background: #0b2b4a;
+      position: relative;
     }
 
     .ba-side img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
     .badge {
@@ -166,10 +147,9 @@
       background: rgba(0,0,0,0.6);
       color: #fff;
     }
-
     .badge.after {
-      right: 8px;
       left: auto;
+      right: 8px;
       background: rgba(33,150,83,0.9);
     }
 
@@ -180,15 +160,14 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      border: none;
       background: rgba(11,43,74,0.9);
       color: #fff;
+      border: none;
       cursor: pointer;
+      font-size: 1.3rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
       z-index: 3;
     }
 
@@ -199,33 +178,81 @@
       display: flex;
       justify-content: center;
       gap: 6px;
-      margin-top: 14px;
+      margin-top: 15px;
     }
 
     .ba-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: rgba(11,43,74,0.25);
-      cursor: pointer;
       border: none;
+      background: rgba(11,43,74,0.3);
+      cursor: pointer;
     }
-
     .ba-dot.active {
       background: var(--blue-mid);
-      transform: scale(1.25);
+      transform: scale(1.3);
+    }
+
+    /* CONTACT + LAYOUT */
+
+    .layout {
+      display: grid;
+      grid-template-columns: 2fr 1.4fr;
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .contact-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(11,43,74,0.12);
+      padding: 20px 18px;
+    }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+      color: #555;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #d1d6e4;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+    textarea { resize: vertical; min-height: 90px; }
+
+    button[type="submit"] {
+      margin-top: 6px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-dark));
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     footer {
       text-align: center;
       padding: 14px;
-      font-size: 0.8rem;
       color: #789;
+      font-size: 0.8rem;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 800px) {
+      .layout { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -234,9 +261,7 @@
 
   <header>
     <h1>Nick's Carpentry and Tile Services</h1>
-
     <p class="tagline">Reliable carpentry and tile work across Charleston.</p>
-
     <p class="lic">Licensed · Insured · Bonded</p>
 
     <div class="hero-phone">
@@ -257,11 +282,11 @@
           <div class="ba-images">
             <div class="ba-side">
               <span class="badge">Before</span>
-              <img src="assets/stair_1_before.jpg">
+              <img src="/website/assets/stair_1_before.jpg">
             </div>
             <div class="ba-side">
               <span class="badge after">After</span>
-              <img src="assets/stair_1_after.jpg">
+              <img src="/website/assets/stair_1_after.jpg">
             </div>
           </div>
         </div>
@@ -272,11 +297,11 @@
           <div class="ba-images">
             <div class="ba-side">
               <span class="badge">Before</span>
-              <img src="assets/stair_2_before.jpg">
+              <img src="/website/assets/stair_2_before.jpg">
             </div>
             <div class="ba-side">
               <span class="badge after">After</span>
-              <img src="assets/stair_2_after.jpg">
+              <img src="/website/assets/stair_2_after.jpg">
             </div>
           </div>
         </div>
@@ -287,11 +312,11 @@
           <div class="ba-images">
             <div class="ba-side">
               <span class="badge">Before</span>
-              <img src="assets/hallway_before.jpg">
+              <img src="/website/assets/hallway_before.jpg">
             </div>
             <div class="ba-side">
               <span class="badge after">After</span>
-              <img src="assets/hallway_after.jpg">
+              <img src="/website/assets/hallway_after.jpg">
             </div>
           </div>
         </div>
@@ -302,11 +327,11 @@
           <div class="ba-images">
             <div class="ba-side">
               <span class="badge">Before</span>
-              <img src="assets/window_before.jpg">
+              <img src="/website/assets/window_before.jpg">
             </div>
             <div class="ba-side">
               <span class="badge after">After</span>
-              <img src="assets/window_after.jpg">
+              <img src="/website/assets/window_after.jpg">
             </div>
           </div>
         </div>
@@ -317,11 +342,11 @@
           <div class="ba-images">
             <div class="ba-side">
               <span class="badge">Before</span>
-              <img src="assets/AC_before.jpg">
+              <img src="/website/assets/AC_before.jpg">
             </div>
             <div class="ba-side">
               <span class="badge after">After</span>
-              <img src="assets/AC_after.jpg">
+              <img src="/website/assets/AC_after.jpg">
             </div>
           </div>
         </div>
@@ -332,21 +357,20 @@
           <div class="ba-images">
             <div class="ba-side">
               <span class="badge">Before</span>
-              <img src="assets/gate_before.jpg">
+              <img src="/website/assets/gate_before.jpg">
             </div>
             <div class="ba-side">
               <span class="badge after">After</span>
-              <img src="assets/gate_after.jpg">
+              <img src="/website/assets/gate_after.jpg">
             </div>
           </div>
         </div>
 
-        <!-- SLIDER BUTTONS -->
+        <!-- slider buttons -->
         <button class="ba-nav-btn prev">&#10094;</button>
         <button class="ba-nav-btn next">&#10095;</button>
       </div>
 
-      <!-- DOTS -->
       <div class="ba-dots">
         <button class="ba-dot active" data-index="0"></button>
         <button class="ba-dot" data-index="1"></button>
@@ -356,6 +380,39 @@
         <button class="ba-dot" data-index="5"></button>
       </div>
 
+    </div>
+
+    <!-- CONTACT AREA -->
+    <div class="layout">
+      <div class="contact-card">
+        <h3>Request a Free Estimate</h3>
+        <p>Tell us about your project and we'll get back to you with timing and pricing.</p>
+
+        <form name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <label>Your Name</label>
+          <input type="text" name="name" required />
+
+          <label>Your Email</label>
+          <input type="email" name="email" required />
+
+          <label>Your Phone</label>
+          <input type="tel" name="phone" />
+
+          <label>Project Details</label>
+          <textarea name="message" required></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+
+      <div class="contact-card">
+        <h3>Service Area</h3>
+        <p>Charleston, West Ashley, James Island, Johns Island and surrounding areas.</p>
+        <p>Prefer to talk?<br>
+        Call or text <strong><a href="tel:+18435579995">+1 (843) 557-9995</a></strong>.</p>
+      </div>
     </div>
   </main>
 
@@ -368,9 +425,10 @@
     const dots = [...document.querySelectorAll(".ba-dot")];
     const prev = document.querySelector(".ba-nav-btn.prev");
     const next = document.querySelector(".ba-nav-btn.next");
+
     let current = 0;
 
-    function showSlide(i) {
+    function show(i) {
       if (i < 0) i = slides.length - 1;
       if (i >= slides.length) i = 0;
       slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
@@ -378,10 +436,11 @@
       current = i;
     }
 
-    next.onclick = () => showSlide(current + 1);
-    prev.onclick = () => showSlide(current - 1);
-    dots.forEach(dot => dot.onclick = () => showSlide(+dot.dataset.index));
-    setInterval(() => showSlide(current + 1), 6000);
+    next.onclick = () => show(current + 1);
+    prev.onclick = () => show(current - 1);
+    dots.forEach(dot => dot.onclick = () => show(+dot.dataset.index));
+
+    setInterval(() => show(current + 1), 6000);
   </script>
 
 </body>
