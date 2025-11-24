@@ -5,183 +5,288 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nick's Carpentry and Tile Services</title>
   <style>
+    :root {
+      --blue-dark: #0b2b4a;
+      --blue-mid: #165a9c;
+      --accent: #f5a623;
+      --bg: #f5f7fb;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f8f5f0;
-      color: #4a2f1d;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: #222;
       line-height: 1.6;
     }
 
     header {
-      background: linear-gradient(135deg, #8B4513, #5a3215);
+      position: relative;
       color: #fff;
-      padding: 40px 20px;
       text-align: center;
+      padding: 60px 20px 80px;
+      background:
+        linear-gradient(135deg, rgba(8,30,60,0.9), rgba(28,91,155,0.8)),
+        url("assets/hero_carpentry.jpg") center/cover no-repeat;
     }
-
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 55%);
+      pointer-events: none;
+    }
+    header > * {
+      position: relative;
+      z-index: 1;
+    }
     header h1 {
       margin: 0;
-      font-size: 2.4rem;
+      font-size: 2.5rem;
+      letter-spacing: 0.04em;
     }
-
-    header p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      font-style: italic;
+    header p.tagline {
+      margin: 10px 0 20px;
+      font-size: 1.05rem;
+      opacity: 0.9;
     }
-
-    header .phone-link {
-      color: #ffe9c6;
+    .hero-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.4);
+      backdrop-filter: blur(4px);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .hero-phone a {
+      color: #fff;
       text-decoration: none;
-      font-weight: bold;
     }
 
     main {
       max-width: 1100px;
-      margin: 0 auto;
-      padding: 30px 20px 50px;
+      margin: -40px auto 40px;
+      padding: 0 16px 40px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(15,35,78,0.15);
+      padding: 24px 20px 28px;
     }
 
     h2 {
       margin-top: 0;
-      color: #5a3215;
-      border-left: 4px solid #8B4513;
-      padding-left: 10px;
+      color: var(--blue-dark);
+      font-size: 1.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2::before {
+      content: "";
+      width: 6px;
+      height: 24px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--accent), var(--blue-mid));
     }
 
-    section {
-      margin-bottom: 40px;
+    /* SLIDER */
+
+    .ba-wrapper {
+      position: relative;
+      overflow: hidden;
     }
-
-    /* BEFORE & AFTER SECTION */
-
-    .before-after .ba-item {
-      background: #f1e2cf;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    .ba-slide {
+      display: none;
+      animation: fadeIn 0.35s ease-out;
     }
-
-    .before-after h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
+    .ba-slide.active {
+      display: block;
     }
-
+    .ba-title {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: var(--blue-dark);
+    }
     .ba-images {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
-
     .ba-side {
-      flex: 1 1 250px;
+      flex: 1 1 260px;
+      min-width: 0;
       position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0b2b4a;
     }
-
     .ba-side img {
       width: 100%;
-      border-radius: 8px;
       display: block;
       object-fit: cover;
     }
-
     .badge {
       position: absolute;
       top: 8px;
       left: 8px;
-      background: rgba(139,69,19,0.9);
-      color: #fff;
       padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      background: rgba(16,51,92,0.9);
+      color: #fff;
     }
-
     .badge.after {
-      background: rgba(46,139,87,0.9);
+      right: 8px;
+      left: auto;
+      background: rgba(33,150,83,0.9);
     }
 
-    /* SIMPLE PROJECT GALLERY (ОБЫЧНЫЕ КАРТИНКИ) */
+    .ba-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(11,43,74,0.9);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .ba-nav-btn:hover {
+      background: rgba(22,90,156,0.95);
+    }
+    .ba-nav-btn.prev {
+      left: 4px;
+    }
+    .ba-nav-btn.next {
+      right: 4px;
+    }
 
-    .gallery-grid {
+    .ba-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .ba-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(11,43,74,0.25);
+      cursor: pointer;
+    }
+    .ba-dot.active {
+      background: var(--blue-mid);
+      transform: scale(1.3);
+    }
+
+    /* CONTACT */
+
+    .layout {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 22px;
+      margin-top: 26px;
     }
-
-    .gallery-grid img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
-      object-fit: cover;
+    .contact-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(11,43,74,0.12);
+      padding: 20px 18px 22px;
     }
-
-    /* CONTACT FORM */
-
-    .contact-form {
-      background-color: #e8d5c0;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 600px;
+    .contact-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: var(--blue-dark);
     }
-
-    .contact-form label {
+    .contact-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    form p {
+      margin: 0 0 10px;
+    }
+    label {
       display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 3px;
     }
-
-    .contact-form input,
-    .contact-form textarea {
+    input, textarea {
       width: 100%;
-      padding: 9px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #b89b7c;
-      box-sizing: border-box;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #d1d6e4;
       font-family: inherit;
+      font-size: 0.9rem;
     }
-
-    .contact-form button {
-      background-color: #8B4513;
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+    button[type="submit"] {
+      margin-top: 6px;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-dark));
       color: #fff;
       border: none;
-      padding: 10px 20px;
       border-radius: 999px;
+      padding: 9px 18px;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
-
-    .contact-form button:hover {
-      background-color: #A0522D;
-    }
-
-    .contact-note {
-      margin-top: 10px;
-      text-align: center;
-      font-weight: bold;
+    button[type="submit"]:hover {
+      filter: brightness(1.05);
     }
 
     footer {
-      background-color: #5a3215;
-      color: #fff;
       text-align: center;
-      padding: 15px 10px;
-      font-size: 0.9rem;
+      padding: 14px 10px 18px;
+      font-size: 0.8rem;
+      color: #789;
     }
 
-    a.phone-link {
-      color: inherit;
-      text-decoration: none;
-      font-weight: bold;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
+      header {
+        padding: 40px 16px 60px;
+      }
       header h1 {
         font-size: 2rem;
+      }
+      main {
+        margin-top: -24px;
+      }
+      .layout {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .ba-nav-btn.prev {
+        left: 2px;
+      }
+      .ba-nav-btn.next {
+        right: 2px;
       }
     }
   </style>
@@ -189,118 +294,129 @@
 <body>
   <header>
     <h1>Nick's Carpentry and Tile Services</h1>
-    <p>Reliable carpentry and tile work across Charleston.</p>
-    <p>
-      Call or text:
-      <a class="phone-link" href="tel:+18435579995">+1 (843) 557-9995</a>
-    </p>
+    <p class="tagline">Reliable carpentry and tile work across Charleston.</p>
+    <div class="hero-phone">
+      <span>Call or text:</span>
+      <a href="tel:+18435579995">+1 (843) 557-9995</a>
+    </div>
   </header>
 
   <main>
-    <!-- ВМЕСТО "OUR SERVICES" — СРАЗУ BEFORE & AFTER -->
-    <section class="before-after">
+    <div class="card">
       <h2>Before &amp; After Projects</h2>
+      <p style="margin: 4px 0 18px; font-size:0.9rem; color:#555;">
+        Swipe through some of our recent work – each slide shows a full project with Before and After side by side.
+      </p>
 
-      <div class="ba-item">
-        <h3>AC Repair</h3>
-        <div class="ba-images">
-          <div class="ba-side">
-            <span class="badge">Before</span>
-            <img src="assets/AC_before.jpg" alt="AC repair before">
-          </div>
-          <div class="ba-side">
-            <span class="badge after">After</span>
-            <img src="assets/AC_after.jpg" alt="AC repair after">
+      <div class="ba-wrapper">
+        <!-- SLIDE 1 -->
+        <div class="ba-slide active">
+          <h3 class="ba-title">Staircase Refinish #1</h3>
+          <div class="ba-images">
+            <div class="ba-side">
+              <span class="badge">Before</span>
+              <img src="assets/stair_1_before.jpg" alt="Staircase before refinishing">
+            </div>
+            <div class="ba-side">
+              <span class="badge after">After</span>
+              <img src="assets/stair_1_after.jpg" alt="Staircase after refinishing">
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="ba-item">
-        <h3>Hallway Remodel</h3>
-        <div class="ba-images">
-          <div class="ba-side">
-            <span class="badge">Before</span>
-            <img src="assets/hallway_before.jpg" alt="Hallway remodel before">
-          </div>
-          <div class="ba-side">
-            <span class="badge after">After</span>
-            <img src="assets/hallway_after.jpg" alt="Hallway remodel after">
+        <!-- SLIDE 2 -->
+        <div class="ba-slide">
+          <h3 class="ba-title">Staircase Refinish #2</h3>
+          <div class="ba-images">
+            <div class="ba-side">
+              <span class="badge">Before</span>
+              <img src="assets/stair_2_before.jpg" alt="Second staircase before refinishing">
+            </div>
+            <div class="ba-side">
+              <span class="badge after">After</span>
+              <img src="assets/stair_2_after.jpg" alt="Second staircase after refinishing">
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="ba-item">
-        <h3>Window Trim &amp; Finish</h3>
-        <div class="ba-images">
-          <div class="ba-side">
-            <span class="badge">Before</span>
-            <img src="assets/window_before.jpg" alt="Window work before">
-          </div>
-          <div class="ba-side">
-            <span class="badge after">After</span>
-            <img src="assets/window_after.jpg" alt="Window work after">
+        <!-- SLIDE 3 -->
+        <div class="ba-slide">
+          <h3 class="ba-title">Hallway Upgrade</h3>
+          <div class="ba-images">
+            <div class="ba-side">
+              <span class="badge">Before</span>
+              <img src="assets/hallway_before.jpg" alt="Hallway before work">
+            </div>
+            <div class="ba-side">
+              <span class="badge after">After</span>
+              <img src="assets/hallway_after.jpg" alt="Hallway after work">
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="ba-item">
-        <h3>Gate Replacement</h3>
-        <div class="ba-images">
-          <div class="ba-side">
-            <span class="badge">Before</span>
-            <img src="assets/gate_before.jpg" alt="Gate before">
-          </div>
-          <div class="ba-side">
-            <span class="badge after">After</span>
-            <img src="assets/gate_after.jpg" alt="Gate after">
+        <!-- SLIDE 4 -->
+        <div class="ba-slide">
+          <h3 class="ba-title">Window Trim &amp; Finish</h3>
+          <div class="ba-images">
+            <div class="ba-side">
+              <span class="badge">Before</span>
+              <img src="assets/window_before.jpg" alt="Window before trim work">
+            </div>
+            <div class="ba-side">
+              <span class="badge after">After</span>
+              <img src="assets/window_after.jpg" alt="Window after trim work">
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="ba-item">
-        <h3>Staircase Refinish 1</h3>
-        <div class="ba-images">
-          <div class="ba-side">
-            <span class="badge">Before</span>
-            <img src="assets/stair_1_before.jpg" alt="Stairs before">
-          </div>
-          <div class="ba-side">
-            <span class="badge after">After</span>
-            <img src="assets/stair_1_after.jpg" alt="Stairs after">
-          </div>
-        </div>
-      </div>
-
-      <div class="ba-item">
-        <h3>Staircase Refinish 2</h3>
-        <div class="ba-images">
-          <div class="ba-side">
-            <span class="badge">Before</span>
-            <img src="assets/stair_2_before.jpg" alt="Stairs before">
-          </div>
-          <div class="ba-side">
-            <span class="badge after">After</span>
-            <img src="assets/stair_2_after.jpg" alt="Stairs after">
+        <!-- SLIDE 5 -->
+        <div class="ba-slide">
+          <h3 class="ba-title">AC Closet Repair</h3>
+          <div class="ba-images">
+            <div class="ba-side">
+              <span class="badge">Before</span>
+              <img src="assets/AC_before.jpg" alt="AC closet before repair">
+            </div>
+            <div class="ba-side">
+              <span class="badge after">After</span>
+              <img src="assets/AC_after.jpg" alt="AC closet after repair">
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ОСТАВИЛА ПРОСТУЮ ГАЛЕРЕЮ ЕСЛИ ХОЧЕШЬ ЕЩЁ ФОТО -->
-    <section class="gallery">
-      <h2>Project Gallery</h2>
-      <div class="gallery-grid">
-        <!-- Можешь удалить или добавить свои фото -->
-        <img src="assets/AC_after.jpg" alt="Finished project">
-        <img src="assets/hallway_after.jpg" alt="Finished project">
-        <img src="assets/window_after.jpg" alt="Finished project">
-        <img src="assets/gate_after.jpg" alt="Finished project">
-      </div>
-    </section>
+        <!-- SLIDE 6 -->
+        <div class="ba-slide">
+          <h3 class="ba-title">Gate Replacement</h3>
+          <div class="ba-images">
+            <div class="ba-side">
+              <span class="badge">Before</span>
+              <img src="assets/gate_before.jpg" alt="Gate before replacement">
+            </div>
+            <div class="ba-side">
+              <span class="badge after">After</span>
+              <img src="assets/gate_after.jpg" alt="Gate after replacement">
+            </div>
+          </div>
+        </div>
 
-    <section class="contact">
-      <h2>Request a Free Estimate</h2>
-      <div class="contact-form">
+        <button class="ba-nav-btn prev" aria-label="Previous project">&#10094;</button>
+        <button class="ba-nav-btn next" aria-label="Next project">&#10095;</button>
+      </div>
+
+      <div class="ba-dots">
+        <button class="ba-dot active" data-index="0"></button>
+        <button class="ba-dot" data-index="1"></button>
+        <button class="ba-dot" data-index="2"></button>
+        <button class="ba-dot" data-index="3"></button>
+        <button class="ba-dot" data-index="4"></button>
+        <button class="ba-dot" data-index="5"></button>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="contact-card">
+        <h3>Request a Free Estimate</h3>
+        <p>Tell us about your project and we'll get back to you with timing and pricing.</p>
         <form name="contact" method="POST" data-netlify="true">
           <input type="hidden" name="form-name" value="contact" />
           <p>
@@ -312,21 +428,65 @@
             <input type="email" name="email" required />
           </p>
           <p>
-            <label>How can we help?</label>
-            <textarea name="message" rows="5" required></textarea>
+            <label>Your Phone</label>
+            <input type="tel" name="phone" />
+          </p>
+          <p>
+            <label>Project Details</label>
+            <textarea name="message" required></textarea>
           </p>
           <button type="submit">Send Message</button>
         </form>
-        <p class="contact-note">
-          Prefer to talk? Call or text
-          <a class="phone-link" href="tel:+18435579995">+1 (843) 557-9995</a>
+      </div>
+
+      <div class="contact-card">
+        <h3>Service Area</h3>
+        <p>Charleston, West Ashley, James Island, Johns Island and surrounding areas.</p>
+        <p style="margin-top:10px;">
+          Prefer to talk?<br />
+          Call or text <strong><a class="phone-link" href="tel:+18435579995">+1 (843) 557-9995</a></strong>.
         </p>
       </div>
-    </section>
+    </div>
   </main>
 
   <footer>
     &copy; Nick's Carpentry and Tile Services 2025. All rights reserved.
   </footer>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".ba-slide"));
+    const dots = Array.from(document.querySelectorAll(".ba-dot"));
+    const prevBtn = document.querySelector(".ba-nav-btn.prev");
+    const nextBtn = document.querySelector(".ba-nav-btn.next");
+
+    let current = 0;
+
+    function showSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      slides.forEach((s, i) => {
+        s.classList.toggle("active", i === index);
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle("active", i === index);
+      });
+      current = index;
+    }
+
+    prevBtn.addEventListener("click", () => showSlide(current - 1));
+    nextBtn.addEventListener("click", () => showSlide(current + 1));
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => {
+        const idx = parseInt(dot.dataset.index, 10);
+        showSlide(idx);
+      });
+    });
+
+    // optional auto-rotate
+    setInterval(() => {
+      showSlide(current + 1);
+    }, 8000);
+  </script>
 </body>
 </html>
